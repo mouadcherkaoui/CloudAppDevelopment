@@ -2,6 +2,6 @@ requests
 Django
 Pillow
 gunicorn
-ibm-cloud-sdk-core==3.10.0
-ibm-watson==5.2.2
-ibmcloudant==0.0.34
+ibm-cloud-sdk-core
+ibm-watson
+ibmcloudant
