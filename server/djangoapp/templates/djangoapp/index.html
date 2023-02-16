@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dealership Review</title>
+    <title>Projeto Avaliação da Concessionária</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -14,50 +14,41 @@
 </head>
 
     <body>
+        {% include 'Navbar.html' %}
     <!--Add a nav bar here -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">BestCars</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/djangoapp/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/djangoapp/contact">Contact Us</a>
-                </li>                      
-            </ul>
-        </div>    
-        {% if user.is_authenticated %}
-        <div class="ml-auto">
-            <a class="h6 mr-2 text-light">Welcome, {{user.username}}</a>
-            <a class="btn btn-outline-danger btn-sm" type="button" href="{% url 'djangoapp:logout' %}">Logout</a>
-        </div> 
-        {% else %}
-        <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
-            {% csrf_token %}<!--Important do not touch-->
-            <input class="" type="text" id="username" name="username" placeholder="UserName:">
-            <input type="password" id="password" name="password" placeholder="Password:">
-            <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
-            <a class="btn btn-outline-warning btn-sm" type="submit" href="{% url 'djangoapp:registration' %}">Sign Up</a>
-        </form>
-        {% endif %}        
-        <!-- <form method="post" class="ml-auto">
-            {% csrf_token %}
-            <input class="" type="text" id="username" name="username" placeholder="UserName:">
-            <input type="password" id="pword" name="pword" placeholder="Password:">
-            <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
-            <a class="btn btn-outline-warning btn-sm" type="submit" href="">Sign Up</a>
-        </form>         -->
-    </nav>   
-    
+    <div class="container">
+     <table class="table table-striped" id="table" data-filter-control="true" style="margin-top: 3%; margin-bottom: 3%;">
+        <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Dealer Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Zip</th>
+                    <th data-field="state" data-filter-control="select">State</th>
+                </tr>
+            </thead>
+        <tbody>
+            {% for dealer in dealerships%}
+                <tr>
+                    <td style="padding: 2%;">{{dealer.id}}</td>
+                    <td style="padding: 2%;"><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                    <td style="padding: 2%;">{{dealer.city}}</td>
+                    <td style="padding: 2%;">{{dealer.address}}</td>
+                    <td style="padding: 2%;">{{dealer.zip}}</td>
+                    <td style="padding: 2%;">{{dealer.st}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <!--Add a dealer table here -->
+    </div>
 
     </body>
+    <script>
+        $(function() {
+            $('#table').bootstrapTable()
+        })
+    </script>
 
 </html>
