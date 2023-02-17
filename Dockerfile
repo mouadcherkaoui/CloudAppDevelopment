@@ -13,8 +13,8 @@ ENV SRVR=/server
 WORKDIR ${SRVR}
 
 # Install the requirements
-COPY ${SRVR}/requirements.txt $APP
-COPY . $APP/
+COPY ./server/requirements.txt $APP
+COPY ./server /app/
 
 WORKDIR ${APP}
 
