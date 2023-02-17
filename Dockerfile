@@ -7,17 +7,18 @@ RUN apt-get update \
     && apt-get install -y netcat
 
 ENV APP=/app
+ENV SRVR=/server
 
 # Change the workdir.
 WORKDIR $APP
 
 # Install the requirements
-COPY requirements.txt $APP
+COPY /server/requirements.txt $APP
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the files
-COPY ./server $APP
+COPY /server $APP
 
 EXPOSE 8000
 
