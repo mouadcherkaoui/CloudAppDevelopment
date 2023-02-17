@@ -10,10 +10,10 @@ ENV APP=/app
 ENV SRVR=/server
 
 # Change the workdir.
-WORKDIR $SRVR
+WORKDIR ${SRVR}
 
 # Install the requirements
-COPY requirements.txt $APP
+COPY ${SRVR}/requirements.txt $APP
 COPY . ${APP}
 
 WORKDIR ${APP}
@@ -27,7 +27,7 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 RUN chmod +x /app/manage.py
-ENTRYPOINT ["python","/app/manage.py"]
+ENTRYPOINT ["python","/app/manage.py", "runserver"]
 
 CMD ["runserver", "0.0.0.0:8000"]
 
