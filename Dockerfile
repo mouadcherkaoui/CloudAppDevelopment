@@ -10,10 +10,9 @@ ENV APP=/app
 
 # Change the workdir.
 WORKDIR ${APP}
-
+CMD ["ls", "/"]
 # Install the requirements
-COPY ./server/requirements.txt $APP
-COPY ./server/. .
+COPY /server/. .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
