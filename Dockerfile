@@ -10,15 +10,19 @@ ENV APP=/app
 ENV SRVR=/server
 
 # Change the workdir.
-WORKDIR $APP
+WORKDIR $SRVR
 
 # Install the requirements
-COPY /server/requirements.txt $APP
+COPY requirements.txt $APP
+COPY . ${APP}
+
+WORKDIR ${APP}
+
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the files
-COPY /server $APP
+#COPY $SRVR/* $APP/*
 
 EXPOSE 8000
 
