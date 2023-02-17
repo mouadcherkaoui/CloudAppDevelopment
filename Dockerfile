@@ -1,4 +1,4 @@
-FROM python:3.8.2
+FROM django:onbuild
 
 ENV PYTHONBUFFERED 1
 ENV PYTHONWRITEBYTECODE 1
@@ -7,22 +7,18 @@ RUN apt-get update \
     && apt-get install -y netcat
 
 ENV APP=/app
-ENV SRVR=/server
 
 # Change the workdir.
-WORKDIR ${SRVR}
+WORKDIR ${APP}
 
 # Install the requirements
 COPY ./server/requirements.txt $APP
-COPY ./server /app/
-
-WORKDIR ${APP}
+COPY ./server/. .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the files
-#COPY $SRVR/* $APP/*
 
 EXPOSE 8000
 
