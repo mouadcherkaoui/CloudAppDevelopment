@@ -22,7 +22,9 @@ COPY /server $APP
 
 EXPOSE 8000
 
-#RUN chmod +x /app/entrypoint.sh
-#ENTRYPOINT ["/app/entrypoint.sh"]
+RUN chmod +x /app/manage.py
+ENTRYPOINT ["python","/app/manage.py"]
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "djangobackend.wsgi"]
+CMD ["runserver", "0.0.0.0:8000"]
+
+#CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "djangobackend.wsgi"]
