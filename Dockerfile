@@ -14,7 +14,7 @@ WORKDIR ${SRVR}
 
 # Install the requirements
 COPY ${SRVR}/requirements.txt $APP
-COPY . $APP
+COPY . $APP/
 
 WORKDIR ${APP}
 
