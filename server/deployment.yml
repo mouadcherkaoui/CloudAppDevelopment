@@ -1,0 +1,20 @@
+ apiVersion: extensions/v1beta1
+ kind: Deployment
+ metadata:
+   name: djangoapp-node-deployment
+ spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       app: djangoappnode
+   template:
+     metadata:
+       labels:
+         app: djangoappnode
+     spec:
+       containers:
+       - name: djangoappnode
+         image: uk.icr.io/cloudapp-registry/djangoapp
+         imagePullPolicy: Always
+         ports:
+         - containerPort: 8000
