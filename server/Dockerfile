@@ -12,8 +12,8 @@ ENV APP=/app
 WORKDIR ${APP}
 
 # Install the requirements
-COPY requirements.txt requirements.txt
-COPY . .
+COPY server/requirements.txt requirements.txt
+COPY server/. .
 
 
 RUN pip install --upgrade pip
