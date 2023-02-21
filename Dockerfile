@@ -26,9 +26,8 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-RUN chmod +x /app/manage.py
-ENTRYPOINT ["python","/app/manage.py", "runserver"]
+ENTRYPOINT ["bash"]
 
-CMD ["runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 #CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "djangobackend.wsgi"]
