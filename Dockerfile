@@ -1,4 +1,4 @@
-FROM python:3.8.2
+FROM python
 
 ENV PYTHONBUFFERED 1
 ENV PYTHONWRITEBYTECODE 1
@@ -7,22 +7,17 @@ RUN apt-get update \
     && apt-get install -y netcat
 
 ENV APP=/app
-ENV SRVR=/server
 
 # Change the workdir.
-WORKDIR ${SRVR}
-
-# Install the requirements
-COPY ${SRVR}/requirements.txt $APP
-COPY . $APP/
-
 WORKDIR ${APP}
+CMD ["ls", "/"]
+# Install the requirements
+COPY /server/. .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the files
-#COPY $SRVR/* $APP/*
 
 EXPOSE 8000
 
